@@ -18,12 +18,17 @@
    <a href="https://forms.gle/HyiXrxC7nurHZF3m7" target="_blank" class="btn btn-primary" role="button">Register</a>
 </div>
 
+<div id="loader"></div>
 
+<div style="display:none;" id="myDiv" class="animate-bottom">
 <div class="container">
   <div class="row profile">
 
   </div>
 </div>
+</div>
+
+
 
 </body>
 
@@ -129,6 +134,8 @@
 				}
 			}
       console.log(data);
+	  document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
     }
 
     window.addEventListener('DOMContentLoaded', init)
