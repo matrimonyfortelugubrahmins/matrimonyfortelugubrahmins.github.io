@@ -1,0 +1,136 @@
+<head>
+   <title>Brahmin Telugu Matrimony</title>
+   <meta charset="UTF-8">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>   
+   <link rel="stylesheet" href="style.css">
+</head>
+<body
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Telugu Brahmin Matrimony</h1>
+	<p><br>A Free Matrimony service, which allows you to register Bride/Bridegroom profile and search for alliances. Please validate the profiles from your end and proceed further. We are not responsible for the information shared in the profiles.<br> All the best for your search ! </p>
+  </div>
+</div>
+<div class="text-right">
+   <a href="https://forms.gle/HyiXrxC7nurHZF3m7" target="_blank" class="btn btn-primary" role="button">Register</a>
+</div>
+
+
+<div class="container">
+  <div class="row profile">
+
+  </div>
+</div>
+
+</body>
+
+<script type='text/javascript'>
+    var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1LA4pAPoM6sGIsc81uJ-W54gF4y-OH6YjhtI8h0O2hSE/edit#gid=1009795729';
+    function init() {
+      Tabletop.init( { key: publicSpreadsheetUrl,
+                       callback: showInfo,
+                       simpleSheet: true } )
+    }
+    var counter = 1;
+	var bride = 'Bride';
+	var bridegroom = 'BrideGroom';
+    function showInfo(data, tabletop) {
+            for(var i = data.length - 1; i >= 0; i--){
+			    var SetIfMarriageFixed = data[i]["Is your marriage fixed ?"];
+				if(SetIfMarriageFixed == 'No'){				
+					var SetGender = data[i]["Gender"] =='Male' ? bridegroom : bride;
+					var addClass = SetGender == bridegroom ? '' : 'green';
+					var SetGenderImage = SetGender == bridegroom ? 'male.png' : 'female.png';
+					var SetProfileCreatedBy = data[i]["Profile Created By"];
+					var SetResidentStatus = data[i]["Resident Status"];
+					var SetMaritalStatus = data[i]["Marital Status"];
+					var SetName = data[i]["Name"];
+					var SetSurname = data[i]["Surname"];
+					var SetSubSect = data[i]["SubSect / Sakha"];
+					var SetGothra = data[i]["Gothra"];
+					var SetFathersName = data[i]["Fathers Name"];
+					var SetFathersOccupation = data[i]["Fathers Occupation"];
+					var SetMothersName = data[i]["Mothers Name"];
+					var SetMothersOccupation = data[i]["Mothers Occupation"];
+					var SetMothersMaidenName = data[i]["Mothers Maiden Name"];
+					var SetTimeOfBirth = data[i]["Time Of Birth"];
+					var SetPlaceOfBirth = data[i]["Place Of Birth"];
+					var SetDateOfBirth = data[i]["Date Of Birth"];
+					var SetBirthStar = data[i]["Birth Star"];
+					var SetPadam = data[i]["Padam"];
+					var SetHighestQualification = data[i]["Highest Qualification"];
+					var SetCollegeUniversityName = data[i]["College/University Name"];
+					var SetPassOutYear = data[i]["Passout Year"];
+					var SetCurrentJobDesignation = data[i]["Current Job - Designation"];
+					var SetCompanyName = data[i]["Company Name"];
+					var SetCurrentJobLocation = data[i]["Current Job - Location"];
+					var SetAnnualSalary = data[i]["Annual Salary in INR"];
+					var SetHeight = data[i]["Height"];
+					var SetComplexion = data[i]["Complexion"];
+					var SetNativePlace = data[i]["Native Place"];
+					var SetMaxAgeGap = data[i]["Max Age - Gap"];
+					var SetEducationPreference = data[i]["Education Preference"];
+					var SetLocationPreference = data[i]["Location Preference"];
+					var SetSubsectPreference = data[i]["Subsect - Preference"];
+					var SetMinHeightPreference = data[i]["Min Height Requirement"];
+					var SetMaxHeightPreference = data[i]["Max Height Requirement"];
+					var SetEmailAddress = data[i]["Email Address"];
+					var SetPrimaryContactNumber = data[i]["Primary Contact Number"];
+					var SetSecondaryContactNumber= data[i]["Secondary Contact Number"];
+
+					$('.profile').append(
+						'<div class="col-lg-6 mb-4">'+
+							'<div class="card '+addClass+'">'+
+							  '<div class="additional">'+
+								'<div class="user-card">'+
+								  '<div class="mstatus center">'+SetResidentStatus+' / '+SetMaritalStatus+
+								  '</div>'+
+								  '<div class="subsect center">'+SetSubSect+
+								  '</div>'+
+								  '<div class="gothra center">'+SetGothra+
+								  '</div>'+
+								  '<div class="surname center">'+SetSurname+
+								  '</div>'+
+								  '<img width="110" height="140" src="'+SetGenderImage+'" class="center">'+
+								  '<div class="pcontact center">'+SetPrimaryContactNumber+
+								  '</div>'+
+								  '<div class="scontact center">'+SetSecondaryContactNumber+
+								  '</div>'+
+								  '</div>'+
+								  '<div class="more-info">'+
+								  '<h2>'+SetName+
+								  '</h2>'+
+								  '<div class="coords">'+
+								  '<h2>Requirements</h2>'+
+								  '<h4>'+SetMinHeightPreference+' ~ '+SetMaxHeightPreference+'</h4>'+
+								  '<h4>'+SetSubsectPreference+'</h4>'+
+								  '<h4>'+SetEducationPreference+'</h4>'+
+								  '<h4>'+SetLocationPreference+'</h4>'+
+								  '</div>'+
+								  '</div>'+
+								  '</div>'+
+								  '<div class="general">'+
+								  '<h2>'+SetName+'</h2>'+
+								  '<p>'+SetDateOfBirth+' | '+SetPlaceOfBirth+' | '+SetTimeOfBirth+'</p>'+
+								  '<p>'+SetBirthStar+' - '+SetPadam+'</p>'+
+								  '<p>'+SetComplexion+' | '+SetHeight+'</p>'+
+								  '<p>'+SetHighestQualification+' | '+SetCollegeUniversityName+' | '+SetPassOutYear+'</p>'+
+								  '<p>'+SetCurrentJobDesignation+' | '+SetCompanyName+' | '+SetCurrentJobLocation+' | '+SetAnnualSalary+'</p>'+
+								  '<p>'+SetFathersName+' | '+SetFathersOccupation+'</p>'+
+								  '<p>'+SetMothersName+' | '+SetMothersOccupation+'</p>'+
+								  '<p>'+SetNativePlace+'</p>'+
+								  '<span class="more">Mouse over the card for requirements</span>'+
+								  '</div>'+
+								  '</div>'+
+								  '</div>');
+				}
+			}
+      console.log(data);
+    }
+
+    window.addEventListener('DOMContentLoaded', init)
+</script>
+</html>
