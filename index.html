@@ -12,7 +12,7 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Matrimony for Telugu Brahmins</h1>
-	<p><br>A Free Matrimony service, which allows you to register Bride/Bridegroom profile and search for alliances. Please validate the profiles from your end and proceed further. We are not responsible for the information shared in the profiles.<br> All the best for your search ! </p>
+	<p><br>A Free Matrimony service, which allows you to register Bride/Bridegroom profile and search for alliances.</br> Please validate the profiles from your end and proceed further. We are not responsible for the information shared in the profiles.<br> All the best for your search ! </p>
   </div>
 </div>
 <div class="text-right">
@@ -86,6 +86,7 @@
 					var SetEmailAddress = data[i]["Email Address"];
 					var SetPrimaryContactNumber = data[i]["Primary Contact Number"];
 					var SetSecondaryContactNumber= data[i]["Secondary Contact Number"];
+					var SetOtherInformation = data[i]["Other Information / Comments"];
 
 					$('.profile').append(
 						'<div class="col-lg-6 mb-4">'+
@@ -115,6 +116,7 @@
 								  '<h4>'+SetSubsectPreference+'</h4>'+
 								  '<h4>'+SetEducationPreference+'</h4>'+
 								  '<h4>'+SetLocationPreference+'</h4>'+
+								  '<h4>'+SetOtherInformation+'</h4>'+
 								  '</div>'+
 								  '</div>'+
 								  '</div>'+
