@@ -2,18 +2,17 @@
 
 /* Center the loader */
 #loader {
-  position: absolute;
+  position:relative ;
   left: 50%;
-  top: 75%;
+  top:20%;
   z-index: 1;
-  width: 150px;
-  height: 150px;
+  width: 75px;
+  height: 75px;
   margin: -75px 0 0 -75px;
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
+
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
@@ -83,6 +82,7 @@ p {
 .card h1 {
   text-align: center;
 }
+
 
 .card .additional {
   position: absolute;
@@ -342,4 +342,66 @@ p {
   font-size: 0.9em;
 }
 
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: black;
+  text-decoration: none;
+  font-size: 17px;
+  width: 20%; /* Four links of equal widths */
+  text-align: center;
+}
+.navbar {
+  width: 100%;
+  overflow: auto;
+  background-color : #eee;
+}
 
+select{
+	width:70%;
+	border-radius: 20px;
+	border: 1px;
+	height : 40px;
+}
+
+.btn-search {
+  min-width: 100px;
+  height: 40px;
+  padding: 0 15px;
+  white-space: nowrap;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #fff;
+  transition: all .2s ease-out, color .2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  z-index: 0;
+  position: relative;
+  background-color : #5bc0de;
+}
+
+ .btn-search:before {
+  border-radius: inherit;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  z-index: -1;
+  transition: all .2s ease-out, color .2s ease-out;
+  background-color : #5bc0de;
+}
+
+.btn-search:hover::before {
+  opacity: 1;
+}
+
+.btn-search:focus {
+  outline: 0;
+  box-shadow: none;
+}
