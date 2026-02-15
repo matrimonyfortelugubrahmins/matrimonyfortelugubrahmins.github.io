@@ -28,12 +28,52 @@ function calculateAge(year, month, day) {
     return age;
 }
 
+// Format date: handles ISO (2024-01-15T18:30:00.000Z) and MM/DD/YYYY
+function formatDate(val) {
+    if (!val) return '';
+    var str = String(val);
+    // Already in MM/DD/YYYY format
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)) return str;
+    // ISO format
+    var d = new Date(str);
+    if (!isNaN(d.getTime())) {
+        return String(d.getMonth() + 1).padStart(2, '0') + '/' + String(d.getDate()).padStart(2, '0') + '/' + d.getFullYear();
+    }
+    return str;
+}
+
+// Format time: handles ISO (1899-12-30T04:41:50.000Z) and HH:MM:SS AM/PM
+function formatTime(val) {
+    if (!val) return '';
+    var str = String(val);
+    // Already in readable format
+    if (/\d{1,2}:\d{2}.*[AaPp][Mm]/.test(str)) return str;
+    // ISO format (Google Sheets stores time as 1899-12-30T...)
+    var d = new Date(str);
+    if (!isNaN(d.getTime())) {
+        var h = d.getUTCHours();
+        var m = d.getUTCMinutes();
+        var s = d.getUTCSeconds();
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ' ' + ampm;
+    }
+    return str;
+}
+
 // ===== LOAD REAL PROFILE DATA =====
 let profiles = [];
 
 function parseAge(dobStr) {
     if (!dobStr) return 0;
-    const parts = dobStr.split('/');
+    const str = String(dobStr);
+    // ISO format
+    if (str.includes('T')) {
+        const d = new Date(str);
+        if (!isNaN(d.getTime())) return calculateAge(d.getFullYear(), d.getMonth() + 1, d.getDate());
+    }
+    // MM/DD/YYYY format
+    const parts = str.split('/');
     if (parts.length !== 3) return 0;
     const month = parseInt(parts[0]);
     const day = parseInt(parts[1]);
@@ -70,9 +110,9 @@ function mapProfile(raw) {
         fatherOccupation: raw['Fathers Occupation'] || '',
         motherName: raw['Mothers Name'] || '',
         motherOccupation: raw['Mothers Occupation'] || '',
-        dateOfBirth: dob,
+        dateOfBirth: formatDate(dob),
         placeOfBirth: raw['Place Of Birth'] || '',
-        timeOfBirth: raw['Time Of Birth'] || '',
+        timeOfBirth: formatTime(raw['Time Of Birth'] || ''),
         birthStar: raw['Birth Star'] || '',
         padam: String(raw['Padam'] || ''),
         age: parseAge(dob),
