@@ -170,12 +170,16 @@ async function loadProfiles() {
 }
 
 // ===== PAGINATION STATE =====
-const PROFILES_PER_PAGE = 20;
+function getProfilesPerPage() {
+    return window.innerWidth <= 600 ? 10 : 20;
+}
+let PROFILES_PER_PAGE = getProfilesPerPage();
 let currentPage = 1;
 let currentFiltered = [];
 
 // ===== RENDER PROFILES =====
 function renderProfiles(filteredProfiles, page) {
+    PROFILES_PER_PAGE = getProfilesPerPage();
     if (filteredProfiles !== undefined) {
         currentFiltered = filteredProfiles;
     }
@@ -764,6 +768,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchInput').addEventListener('input', () => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => filterProfiles(), 300);
+    });
+
+    // Update profiles per page on resize
+    window.addEventListener('resize', () => {
+        var newPPP = getProfilesPerPage();
+        if (newPPP !== PROFILES_PER_PAGE) {
+            PROFILES_PER_PAGE = newPPP;
+            renderProfiles(currentFiltered, 1);
+        }
     });
     loadProfiles();
 });
