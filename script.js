@@ -49,10 +49,15 @@ function formatTime(val) {
     // Already in readable format
     if (/\d{1,2}:\d{2}.*[AaPp][Mm]/.test(str)) return str;
     // ISO format (Google Sheets stores time as 1899-12-30T...)
+    // Google Sheets exports local time shifted to UTC, need to add IST offset (+5:30)
     var d = new Date(str);
     if (!isNaN(d.getTime())) {
-        var h = d.getUTCHours();
-        var m = d.getUTCMinutes();
+        // Add IST offset (5 hours 30 minutes) to get original local time
+        var totalMinutes = d.getUTCHours() * 60 + d.getUTCMinutes() + 330;
+        if (totalMinutes >= 1440) totalMinutes -= 1440;
+        if (totalMinutes < 0) totalMinutes += 1440;
+        var h = Math.floor(totalMinutes / 60);
+        var m = totalMinutes % 60;
         var s = d.getUTCSeconds();
         var ampm = h >= 12 ? 'PM' : 'AM';
         h = h % 12 || 12;
