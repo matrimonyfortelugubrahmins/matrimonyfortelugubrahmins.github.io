@@ -28,29 +28,28 @@ body {
 }
 
 /* ===== STICKY TOP ===== */
-.sticky-top { position: sticky; top: 0; z-index: 99; }
 
 /* ===== HEADER ===== */
 .header { background: var(--blue); }
 .header-container {
-    max-width: 1280px; margin: 0 auto; padding: 12px 32px;
+    max-width: 1280px; margin: 0 auto; padding: 20px 32px;
     display: flex; align-items: center; justify-content: space-between;
 }
-.logo-section { display: flex; align-items: center; gap: 12px; }
+.logo-section { display: flex; align-items: center; gap: 16px; }
 .logo-icon {
-    width: 44px; height: 44px; background: rgba(255,255,255,0.2);
-    border-radius: 12px; display: flex; align-items: center; justify-content: center; position: relative;
+    width: 56px; height: 56px; background: rgba(255,255,255,0.2);
+    border-radius: 14px; display: flex; align-items: center; justify-content: center; position: relative;
 }
-.om-icon { font-size: 24px; color: var(--white); font-weight: 700; line-height: 1; }
-.logo-icon .fa-heart { color: var(--white); font-size: 18px; }
+.om-icon { font-size: 30px; color: var(--white); font-weight: 700; line-height: 1; }
+.logo-icon .fa-heart { color: var(--white); font-size: 22px; }
 .logo-icon .heart-small { position: absolute; font-size: 8px; top: 6px; right: 6px; color: rgba(255,255,255,0.5); }
-.logo-text h1 { font-size: 20px; font-weight: 600; color: var(--white); line-height: 1.2; }
-.tagline { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 400; }
+.logo-text h1 { font-size: 26px; font-weight: 700; color: var(--white); line-height: 1.2; }
+.tagline { font-size: 14px; color: rgba(255,255,255,0.8); font-weight: 400; }
 
 .register-btn {
     background: var(--white); color: var(--blue); border: none;
-    padding: 10px 22px; border-radius: 8px;
-    font-size: 14px; font-weight: 600; font-family: 'Poppins', sans-serif;
+    padding: 12px 28px; border-radius: 10px;
+    font-size: 15px; font-weight: 700; font-family: 'Poppins', sans-serif;
     cursor: pointer; transition: all 0.15s ease;
     display: flex; align-items: center; gap: 8px;
 }
