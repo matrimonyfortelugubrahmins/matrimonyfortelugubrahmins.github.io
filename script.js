@@ -745,6 +745,17 @@ const infoContent = {
         
         <p class="faq-q">Q: Is my contact information safe?</p>
         <p>Your contact details are visible only on this platform to other users browsing profiles. We do not share your information with any third parties.</p>
+    `,
+    partners: `
+        <h2><i class="fas fa-handshake"></i> Our Partners</h2>
+        <p>We are proud to collaborate with like-minded organizations who share our vision of serving the Telugu Brahmin community in finding suitable life partners.</p>
+        
+        <h3>S.B.M.N Matrimony</h3>
+        <p>S.B.M.N Matrimony is a trusted community partner working alongside us to expand our reach and help more families find the right match. Together, we aim to provide a comprehensive and reliable platform for the Telugu Brahmin community.</p>
+        
+        <div class="highlight">
+            <strong>Want to partner with us?</strong> If you run a community organization or matrimony service for Telugu Brahmins and would like to collaborate, please reach out to us at matrimonyfortelugubrahmins@gmail.com
+        </div>
     `
 };
 
