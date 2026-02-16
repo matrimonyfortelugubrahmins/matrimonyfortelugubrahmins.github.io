@@ -155,7 +155,7 @@ async function loadProfiles() {
             return fixed !== 'yes';
         });
 
-        profiles = active.map(mapProfile);
+        profiles = active.map(mapProfile).reverse();
         loadFavorites();
         renderProfiles(profiles);
     } catch (e) {
