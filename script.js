@@ -145,27 +145,74 @@ function mapProfile(raw) {
 }
 
 async function loadProfiles() {
-    try {
-        const response = await fetch('https://raw.githubusercontent.com/matrimonyfortelugubrahmins/matrimonyfortelugubrahmins.github.io/main/matrimony.json');
-        const rawData = await response.json();
+    const CACHE_KEY = 'matrimony_profiles_cache';
+    const HASH_KEY = 'matrimony_profiles_hash';
+    const JSON_URL = 'https://raw.githubusercontent.com/matrimonyfortelugubrahmins/matrimonyfortelugubrahmins.github.io/main/matrimony.json';
 
-        // Filter out profiles where marriage is fixed
+    // Simple hash function for change detection
+    function simpleHash(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            hash |= 0;
+        }
+        return String(hash);
+    }
+
+    function processRawData(rawData) {
         const active = rawData.filter(r => {
             const fixed = (r['Is your marriage fixed ?'] || '').trim().toLowerCase();
             return fixed !== 'yes';
         });
-
         profiles = active.map(mapProfile).reverse();
         loadFavorites();
         renderProfiles(profiles);
+    }
+
+    try {
+        // Try loading from cache first for instant display
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            try {
+                const cachedData = JSON.parse(cached);
+                processRawData(cachedData);
+            } catch(e) {
+                localStorage.removeItem(CACHE_KEY);
+            }
+        }
+
+        // Fetch fresh data (in background if cache exists)
+        const response = await fetch(JSON_URL);
+        const text = await response.text();
+        const newHash = simpleHash(text);
+        const oldHash = localStorage.getItem(HASH_KEY);
+
+        // Only update if data changed or no cache
+        if (newHash !== oldHash || !cached) {
+            const rawData = JSON.parse(text);
+            processRawData(rawData);
+
+            // Save to cache
+            try {
+                localStorage.setItem(CACHE_KEY, text);
+                localStorage.setItem(HASH_KEY, newHash);
+            } catch(e) {
+                // localStorage full — clear old cache
+                localStorage.removeItem(CACHE_KEY);
+                localStorage.removeItem(HASH_KEY);
+            }
+        }
     } catch (e) {
         console.error('Error loading profiles:', e);
-        document.getElementById('profilesGrid').innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>Error loading profiles. Please try again later.</h3>
-            </div>
-        `;
+        // If fetch fails but cache exists, we already loaded from cache above
+        if (!profiles.length) {
+            document.getElementById('profilesGrid').innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error loading profiles. Please try again later.</h3>
+                </div>
+            `;
+        }
     }
 }
 
